@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunaheart.love — เว็บของขวัญที่เลือกเองได้</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FDF8FB;
+            --white: #FFFFFF;
+            --ink: #2E2228;
+            --ink-soft: #9A848E;
+            --ink-faint: #C8B8C0;
+            --pink: #E8A0B8;
+            --pink-deep: #C0607E;
+            --pink-bg: #FBEDF3;
+            --pink-bg2: #F5DDE8;
+            --rose: #FDF0F5;
+            --peach: #FDEEE6;
+            --cream: #FDF7F2;
+            --border: rgba(220, 140, 170, 0.15);
+            --border2: rgba(220, 140, 170, 0.28);
+            --sh: 0 2px 16px rgba(200, 100, 140, 0.07), 0 1px 4px rgba(200, 100, 140, 0.04);
+            --sh2: 0 6px 28px rgba(200, 100, 140, 0.13);
+            --r: 22px;
+            --r2: 16px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Kanit', sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            line-height: 1.78;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── TOPBAR ── */
+        .topbar {
+            padding: 1.5rem 0 0;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.26em;
+            color: var(--pink-deep);
+            text-transform: uppercase;
+        }
+
+        /* ── HERO ── */
+        .hero-wrap {
+            max-width: 480px;
+            margin: 1.5rem auto 0;
+            padding: 0 1.25rem;
+        }
+
+        .hero-box {
+            background: linear-gradient(135deg, #FFF0F6 0%, #FDEAF3 50%, #FDE6F0 100%);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            padding: 1.75rem 1.5rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--sh);
+        }
+
+        .hero-box::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(232, 160, 184, 0.2) 0%, transparent 65%);
+            top: -70px;
+            right: -60px;
+            pointer-events: none;
+        }
+
+        .hero-box::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(253, 200, 220, 0.18) 0%, transparent 65%);
+            bottom: -40px;
+            left: -20px;
+            pointer-events: none;
+        }
+
+        .hero-q {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.4;
+            position: relative;
+        }
+
+        /* ── CONCEPT CARDS ── */
+        .cc-wrap {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .cc {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 1rem 1.1rem 1rem 1.1rem;
+            display: flex;
+            gap: 0.85rem;
+            align-items: flex-start;
+            box-shadow: var(--sh);
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .cc:hover {
+            box-shadow: var(--sh2);
+            transform: translateY(-1px);
+        }
+
+        .cc-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F9D0DF 0%, #F5BED1 100%);
+            color: var(--pink-deep);
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            box-shadow: 0 2px 8px rgba(200, 100, 140, 0.15);
+        }
+
+        .cc-text {
+            font-size: 13.5px;
+            color: var(--ink);
+            line-height: 1.72;
+        }
+
+        /* ── DIVIDER ── */
+        .div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 480px;
+            margin: 1.75rem auto;
+            padding: 0 1.25rem;
+        }
+
+        .div-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border2), transparent);
+        }
+
+        .div-heart {
+            font-size: 14px;
+            color: var(--pink);
+            opacity: 0.7;
+            flex-shrink: 0;
+        }
+
+        /* ── SECTION ── */
+        .sec {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 1.25rem 1.75rem;
+        }
+
+        .sec-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 0.9rem;
+        }
+
+        /* ── GET LIST ── */
+        .get-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .get-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--r2);
+            padding: 0.9rem 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            box-shadow: var(--sh);
+        }
+
+        .get-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #F9D0DF 0%, #F5BED1 100%);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+            box-shadow: 0 2px 6px rgba(200, 100, 140, 0.12);
+        }
+
+        .get-dot svg {
+            width: 11px;
+            height: 11px;
+        }
+
+        .get-text {
+            font-size: 13.5px;
+            line-height: 1.72;
+        }
+
+        .get-text strong {
+            font-weight: 500;
+            color: var(--pink-deep);
+        }
+
+        /* ── FIXED CARD ── */
+        .fixed-card {
+            background: linear-gradient(145deg, #FFF5F9 0%, #FDEAF3 100%);
+            border: 1px solid var(--border2);
+            border-radius: var(--r);
+            overflow: hidden;
+            box-shadow: var(--sh);
+        }
+
+        .fixed-body {
+            padding: 1.25rem 1.25rem 1rem;
+        }
+
+        .fixed-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F9D0DF 0%, #F5BED1 100%);
+            color: var(--pink-deep);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 13px;
+            border-radius: 99px;
+            margin-bottom: 0.6rem;
+            box-shadow: 0 2px 8px rgba(200, 100, 140, 0.12);
+        }
+
+        .fixed-title {
+            font-size: 14.5px;
+            font-weight: 500;
+            line-height: 1.65;
+            margin-bottom: 4px;
+        }
+
+        .fixed-sub {
+            font-size: 13px;
+            color: var(--ink-soft);
+        }
+
+        .fixed-foot {
+            border-top: 1px solid var(--border);
+            padding: 0.9rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .fixed-note {
+            font-size: 12px;
+            color: var(--ink-faint);
+        }
+
+        .prev-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 18px;
+            border-radius: 99px;
+            background: linear-gradient(135deg, #E8A0B8 0%, #D8809C 100%);
+            color: #fff;
+            font-family: 'Kanit', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: none;
+            box-shadow: 0 3px 14px rgba(200, 100, 140, 0.28);
+            transition: opacity 0.15s, box-shadow 0.15s;
+            white-space: nowrap;
+        }
+
+        .prev-btn:hover {
+            opacity: 0.88;
+            box-shadow: 0 5px 18px rgba(200, 100, 140, 0.36);
+        }
+
+        .prev-btn svg {
+            width: 10px;
+            height: 10px;
+        }
+
+        /* ── MENUS ── */
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            color: var(--pink-deep);
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .cat-wrap {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            box-shadow: var(--sh);
+            margin-bottom: 12px;
+        }
+
+        .cat-label {
+            background: linear-gradient(to right, #FDE8F0, #FDEEF5);
+            color: var(--pink-deep);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.55rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card {
+            padding: 11px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.12s;
+        }
+
+        .menu-card:last-child {
+            border-bottom: none;
+        }
+
+        .menu-card:hover {
+            background: var(--rose);
+        }
+
+        .menu-name {
+            font-size: 14px;
+            color: var(--ink);
+            font-weight: 300;
+        }
+
+        .pill {
+            flex-shrink: 0;
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--pink-deep);
+            background: var(--pink-bg);
+            border-radius: 99px;
+            padding: 3px 12px;
+            white-space: nowrap;
+            transition: background 0.12s;
+        }
+
+        .menu-card:hover .pill {
+            background: var(--pink-bg2);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 2rem 1.25rem 3.5rem;
+            text-align: center;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--pink-deep);
+            margin-bottom: 3px;
+        }
+
+        .footer-sub {
+            font-size: 12px;
+            color: var(--ink-faint);
+        }
+
+        /* ── REVEAL ── */
+        .rev {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .rev.on {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topbar">lunaheart.love</div>
+
+    <div class="div rev">
+        <div class="div-line"></div>
+        <div class="div-heart">♡</div>
+        <div class="div-line"></div>
+    </div>
+
+    <div class="sec rev">
+        <div class="eyebrow rev">3 หน้าหลัก</div>
+        <div class="sec-title">ตัวอย่างหน้าหลัก</div>
+        <div class="fixed-card">
+            <div class="fixed-body">
+                <div class="fixed-badge">มีครบทุกแพ็กเกจ</div>
+                <div class="fixed-title">หน้าแรก &nbsp;+&nbsp; หน้าตั้งรหัสผ่าน &nbsp;+&nbsp; หน้าเลือกเมนู</div>
+                <div class="fixed-sub">ทุกเว็บมีให้อยู่แล้ว 3 หน้านี้ไม่สามารถแก้ไขได้</div>
+            </div>
+            <div class="fixed-foot">
+                <div class="fixed-note">ดูตัวอย่างจริงได้เลย</div>
+                <a href="https://lunaheartlove.github.io/exDIY/" target="_blank" class="prev-btn">
+                    ดูตัวอย่าง
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="div rev">
+        <div class="div-line"></div>
+        <div class="div-heart">♡</div>
+        <div class="div-line"></div>
+    </div>
+
+    <div class="sec" style="padding-bottom:4rem" id="menus">
+        <div class="eyebrow rev">เมนูทั้งหมด ที่สามารถเลือก DIY ได้</div>
+        <div class="sec-title rev">กดดูตัวอย่างได้เลย</div>
+
+        <div class="rev">
+            <div class="cat-wrap">
+                <div class="cat-label">วันครบรอบ</div>
+                <div class="menu-list">
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-calendar.html" target="_blank"
+                        class="menu-card"><span class="menu-name">เราคบกันมาแล้วกี่วัน V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V2-calendar.html" target="_blank"
+                        class="menu-card"><span class="menu-name">เราคบกันมาแล้วกี่วัน V.2</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                </div>
+            </div>
+
+            <div class="cat-wrap">
+                <div class="cat-label">วันเกิด</div>
+                <div class="menu-list">
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-cake.html" target="_blank" class="menu-card"><span
+                            class="menu-name">เป่าเค้กวันเกิด V.1</span><span class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-birthday.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ตั้งแต่วันที่เธอเกิด V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                </div>
+            </div>
+
+            <div class="cat-wrap">
+                <div class="cat-label">ง้อแฟน</div>
+                <div class="menu-list">
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-sorry.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ง้อแฟน V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                </div>
+            </div>
+
+            <div class="cat-wrap">
+                <div class="cat-label">ขอเป็นแฟน</div>
+                <div class="menu-list">
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-boyfriend.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ขอเป็นแฟน V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                </div>
+            </div>
+
+            <div class="cat-wrap">
+                <div class="cat-label">รวมเมนู — ใส่ร่วมกับหมวดอื่นได้</div>
+                <div class="menu-list">
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-memory.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ความทรงจำ V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V2-memory.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ความทรงจำ V.2</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-massage.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ข้อความถึงคนน่ารัก V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V2-massage.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ข้อความถึงคนน่ารัก V.2</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-quiz.html" target="_blank" class="menu-card"><span
+                            class="menu-name">ทำแบบทดสอบกัน V.1</span><span class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-jigsaw.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ต่อจิ๊กซอว์กัน V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-random.html" target="_blank"
+                        class="menu-card"><span class="menu-name">วงล้อสุ่มตามใจ V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-music.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ฟังเพลงของเรา V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-secret.html" target="_blank"
+                        class="menu-card"><span class="menu-name">เกมขูดรูปภาพ V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-fortune.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ไพ่เสริมดวง V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-polaroid.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ถ่ายรูปโพลารอยด์ V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-flower.html" target="_blank"
+                        class="menu-card"><span class="menu-name">ดอกไม้ให้คนน่ารัก V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-video.html" target="_blank"
+                        class="menu-card"><span class="menu-name">คลิปความทรงจำ V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                    <a href="https://lunaheartlove.github.io/exDIY/V1-match.html" target="_blank"
+                        class="menu-card"><span class="menu-name">เกมจับคู่ภาพ V.1</span><span
+                            class="pill">ดูตัวอย่าง</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="div rev">
+        <div class="div-line"></div>
+        <div class="div-heart">♡</div>
+        <div class="div-line"></div>
+    </div>
+
+    <div class="hero-wrap rev">
+        <div class="hero-box">
+            <div class="hero-q">DIY เว็บให้แฟน คืออะไร?</div>
+        </div>
+    </div>
+
+    <div class="cc-wrap rev">
+        <div class="cc">
+            <div class="cc-num">1</div>
+            <div class="cc-text">เป็นเว็บสำเร็จรูปที่มีหน้าแรก + หน้ารหัสผ่าน + หน้าเลือกเมนู ให้แล้ว ทั้ง 3
+                หน้านี้จะเหมือนกันทุกเว็บ และไม่สามารถแก้ไขได้</div>
+        </div>
+        <div class="cc">
+            <div class="cc-num">2</div>
+            <div class="cc-text">สิ่งที่ลูกค้าสามารถ "DIY ได้" คือการเลือกเมนูภายในเว็บว่าอยากให้มีอะไรบ้าง
+                โดยสามารถเลือกจัดได้เองจากเมนูที่มีให้เลือกหลากหลาย</div>
+        </div>
+        <div class="cc">
+            <div class="cc-num">3</div>
+            <div class="cc-text">ครอบคลุมหลายโอกาส เช่น วันครบรอบ วันเกิด ง้อแฟน หรือขอเป็นแฟน</div>
+        </div>
+    </div>
+
+    <div class="div rev">
+        <div class="div-line"></div>
+        <div class="div-heart">♡</div>
+        <div class="div-line"></div>
+    </div>
+
+    <div class="sec rev">
+        <div class="sec-title">สิ่งที่ได้รับ</div>
+        <div class="get-list">
+            <div class="get-item">
+                <div class="get-dot">
+                    <svg viewBox="0 0 10 10" fill="none">
+                        <path d="M2 5L4.2 7.5L8 2.5" stroke="#C0607E" stroke-width="1.6" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="get-text"><strong>1 เว็บพร้อมใช้งาน</strong> เปิดผ่านลิงก์ได้เลย ส่งให้แฟนเปิดดูได้ทันที
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sec rev" style="padding-top:0">
+        <div class="sec-title">วิธีสั่งซื้อ</div>
+        <div class="get-list">
+            <div class="get-item">
+                <div class="get-dot">
+                    <svg viewBox="0 0 10 10" fill="none">
+                        <path d="M2 5L4.2 7.5L8 2.5" stroke="#C0607E" stroke-width="1.6" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="get-text"><strong>เพียงแค่</strong> เลือกเมนู + กรอกข้อมูลผ่านฟอร์ม + รอรับลิงก์เว็บได้เลย
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="rev">
+        <div class="footer-brand">lunaheart.love</div>
+        <div class="footer-sub">ทำเว็บน่ารักให้คนที่รัก</div>
+    </footer>
+
+    <script>
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+        }, { threshold: 0.06 });
+        document.querySelectorAll('.rev').forEach(el => io.observe(el));
+    </script>
+</body>
+
+</html>
